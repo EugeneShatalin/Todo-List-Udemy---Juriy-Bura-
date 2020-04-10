@@ -3,8 +3,14 @@ import './todo-list-item.css';
 
 export default class TodoListItem extends Component {
 
+    state = {
+        done: false
+    }
+
         onLabelClick = () => {
-            console.log(this.props.label)
+            this.setState({
+                done: true
+            });
         }
 
     render() {
@@ -13,8 +19,15 @@ export default class TodoListItem extends Component {
             color: important ? 'steelblue' : 'black',
             fontWeight: important ? 'bold' : 'normal'
         };
+        const { done } = this.state;
+
+        let classNames = 'todo-list-item';
+        if(done) {
+            classNames += ' done';
+        }
+
         return (
-            <span className="todo-list-item">
+            <span className={classNames}>
                 <span className="todo-list-item-label"
                       style={style}
                       onClick={ this.onLabelClick }
